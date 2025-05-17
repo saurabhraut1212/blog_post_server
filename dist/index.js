@@ -7,11 +7,11 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 //import authRoutes from "./routes/authRoutes";
-//import { connectDB } from "./config/db";
+const db_1 = require("./config/db");
 //import { errorHandler } from "./middlewares/errorMiddleware";
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-//connectDB();
+(0, db_1.connectDB)();
 app.get("/", (req, res) => {
     res.send("Welcome to the API");
 });
