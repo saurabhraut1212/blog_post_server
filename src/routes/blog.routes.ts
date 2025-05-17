@@ -4,6 +4,7 @@ import {
   getBlogs,
   updateExistingBlog,
   deleteExistingBlog,
+  getBlogWithId,
 } from "../controllers/blog.controller";
 import { authenticate } from "../middlewares/auth.middleware";
 import { validate } from "../middlewares/validate.middleware";
@@ -20,5 +21,6 @@ router.put(
   updateExistingBlog
 );
 router.delete("/delete/:id", authenticate, deleteExistingBlog);
+router.get("/getBlogById/:id", authenticate, getBlogWithId);
 
 export default router;

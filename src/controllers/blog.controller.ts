@@ -4,6 +4,7 @@ import {
   getAllBlogs,
   updateBlog,
   deleteBlog,
+  getBlogById,
 } from "../services/blog.services";
 
 export const createNewBlog = async (
@@ -48,5 +49,17 @@ export const deleteExistingBlog = async (
     res.status(200).json({ message: result.message });
   } else {
     res.status(403).json({ message: result.message });
+  }
+};
+
+export const getBlogWithId = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const result = await getBlogById(req.params.id, req.user!);
+  if (result.success) {
+    res.status(200).json({ message: result.message, data: result.data });
+  } else {
+    res.status(404).json({ message: result.message });
   }
 };

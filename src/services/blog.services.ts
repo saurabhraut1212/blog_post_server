@@ -100,3 +100,36 @@ export const deleteBlog = async (
     };
   }
 };
+
+export const getBlogById = async (
+  blogId: string,
+  user: IUser
+): Promise<ServiceResult> => {
+  try {
+    if (!user || !user._id) {
+      return {
+        success: false,
+        message: "User not authenticated",
+      };
+    }
+
+    const blog = await BlogModel.findOne({ _id: blogId, author: user._id });
+    if (!blog) {
+      return {
+        success: false,
+        message: "Blog not found or you are not the author",
+      };
+    }
+    return {
+      success: true,
+      message: "Blog fetched successfully",
+      data: blog,
+    };
+  } catch (error) {
+    console.log(error, "error");
+    return {
+      success: false,
+      message: "Failed to fetch blog",
+    };
+  }
+};
