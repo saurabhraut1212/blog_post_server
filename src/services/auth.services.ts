@@ -50,7 +50,11 @@ export const loginUser = async (data: LoginData): Promise<ServiceResult> => {
       return { success: false, message: "Invalid email or password" };
     }
 
-    const token = generateToken(user._id.toString());
+    const tokenData = {
+      userId: user._id.toString(),
+      email: user.email,
+    };
+    const token = generateToken(tokenData);
 
     return {
       success: true,
