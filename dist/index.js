@@ -12,11 +12,11 @@ const blog_routes_1 = __importDefault(require("./routes/blog.routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 (0, db_1.connectDB)();
-app.use((0, cors_1.default)());
-app.use(express_1.default.json());
 app.get("/", (req, res) => {
     res.send("Welcome to the API");
 });
+app.use((0, cors_1.default)());
+app.use(express_1.default.json());
 app.use("/api/auth", auth_routes_1.default);
 app.use("/api/blog", blog_routes_1.default);
 exports.default = app;

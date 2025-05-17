@@ -15,9 +15,11 @@ export const authenticate = async (
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
-      id: string;
+      userId: string;
     };
-    const user = await User.findById(decoded.id);
+
+    const { userId } = decoded;
+    const user = await User.findById(userId);
     if (!user) {
       res.status(404).json({ message: "User not found" });
       return;

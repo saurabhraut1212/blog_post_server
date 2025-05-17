@@ -11,14 +11,14 @@ import { blogSchema, blogUpdateSchema } from "../schemas/blog.schema";
 
 const router = Router();
 
-router.get("/", getBlogs);
-router.post("/", authenticate, validate(blogSchema), createNewBlog);
+router.get("/allBlogs", getBlogs);
+router.post("/create", authenticate, validate(blogSchema), createNewBlog);
 router.put(
-  "/:id",
+  "/update/:id",
   authenticate,
   validate(blogUpdateSchema),
   updateExistingBlog
 );
-router.delete("/:id", authenticate, deleteExistingBlog);
+router.delete("/delete/:id", authenticate, deleteExistingBlog);
 
 export default router;

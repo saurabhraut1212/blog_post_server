@@ -24,7 +24,8 @@ const authenticate = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     try {
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-        const user = yield user_model_1.User.findById(decoded.id);
+        const { userId } = decoded;
+        const user = yield user_model_1.User.findById(userId);
         if (!user) {
             res.status(404).json({ message: "User not found" });
             return;
