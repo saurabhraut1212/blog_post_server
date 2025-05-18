@@ -50,7 +50,11 @@ const loginUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
         if (!isMatch) {
             return { success: false, message: "Invalid email or password" };
         }
-        const token = (0, jwt_1.generateToken)(user._id.toString());
+        const tokenData = {
+            userId: user._id.toString(),
+            email: user.email,
+        };
+        const token = (0, jwt_1.generateToken)(tokenData);
         return {
             success: true,
             message: "Login successful",

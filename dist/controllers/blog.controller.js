@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteExistingBlog = exports.updateExistingBlog = exports.getBlogs = exports.createNewBlog = void 0;
+exports.getBlogWithId = exports.deleteExistingBlog = exports.updateExistingBlog = exports.getBlogs = exports.createNewBlog = void 0;
 const blog_services_1 = require("../services/blog.services");
 const createNewBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield (0, blog_services_1.createBlog)(req.body, req.user);
@@ -51,3 +51,13 @@ const deleteExistingBlog = (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.deleteExistingBlog = deleteExistingBlog;
+const getBlogWithId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield (0, blog_services_1.getBlogById)(req.params.id, req.user);
+    if (result.success) {
+        res.status(200).json({ message: result.message, data: result.data });
+    }
+    else {
+        res.status(404).json({ message: result.message });
+    }
+});
+exports.getBlogWithId = getBlogWithId;

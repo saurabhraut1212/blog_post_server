@@ -10,4 +10,5 @@ router.get("/allBlogs", blog_controller_1.getBlogs);
 router.post("/create", auth_middleware_1.authenticate, (0, validate_middleware_1.validate)(blog_schema_1.blogSchema), blog_controller_1.createNewBlog);
 router.put("/update/:id", auth_middleware_1.authenticate, (0, validate_middleware_1.validate)(blog_schema_1.blogUpdateSchema), blog_controller_1.updateExistingBlog);
 router.delete("/delete/:id", auth_middleware_1.authenticate, blog_controller_1.deleteExistingBlog);
+router.get("/getBlogById/:id", blog_controller_1.getBlogWithId);
 exports.default = router;

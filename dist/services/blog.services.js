@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteBlog = exports.updateBlog = exports.getAllBlogs = exports.createBlog = void 0;
+exports.getBlogById = exports.deleteBlog = exports.updateBlog = exports.getAllBlogs = exports.createBlog = void 0;
 const blog_model_1 = require("../models/blog.model");
 const createBlog = (data, user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -99,3 +99,33 @@ const deleteBlog = (blogId, user) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.deleteBlog = deleteBlog;
+const getBlogById = (blogId, user) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (!user || !user._id) {
+            return {
+                success: false,
+                message: "User not authenticated",
+            };
+        }
+        const blog = yield blog_model_1.BlogModel.findOne({ _id: blogId, author: user._id });
+        if (!blog) {
+            return {
+                success: false,
+                message: "Blog not found or you are not the author",
+            };
+        }
+        return {
+            success: true,
+            message: "Blog fetched successfully",
+            data: blog,
+        };
+    }
+    catch (error) {
+        console.log(error, "error");
+        return {
+            success: false,
+            message: "Failed to fetch blog",
+        };
+    }
+});
+exports.getBlogById = getBlogById;
