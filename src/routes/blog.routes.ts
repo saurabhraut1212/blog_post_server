@@ -21,6 +21,6 @@ router.put(
   updateExistingBlog
 );
 router.delete("/delete/:id", authenticate, deleteExistingBlog);
-router.get("/getBlogById/:id", getBlogWithId);
+router.get("/getBlogById/:id", authenticate, getBlogWithId);
 
 export default router;
